@@ -1,0 +1,7 @@
+{
+  "name": "design-checkpoint",
+  "version": "0.1.0",
+  "description": "Makes Plan mode surface key architecture and design decisions for you to choose before any plan is written.",
+  "keywords": ["plan-mode", "architecture", "design-decisions", "planning"],
+  "license": "MIT"
+}

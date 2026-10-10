@@ -1,0 +1,14 @@
+---
+description: Before writing any plan, run the design-decision checkpoint
+alwaysApply: true
+---
+
+When planning (Plan mode, or any request to design, architect, or plan something
+non-trivial), do NOT write the plan or make architectural choices silently.
+
+First use the `design-decisions` skill: identify the significant design
+decisions, check which are already settled, and ask the user to choose the
+open ones. Only draft the plan after those are answered.
+
+Skip the checkpoint for small, local changes (a bug fix, a rename, a single
+function, a typo, a config tweak).
