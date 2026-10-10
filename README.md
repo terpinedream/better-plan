@@ -11,9 +11,9 @@ explains them, and asks you to choose, instead of silently deciding for you.
   you were making
 - Skips anything already specified in your request, AGENTS.md, rules, past
   decisions, or existing code
-- Presents 2-4 options per decision with pros, cons, and a recommendation
-- Limits itself to the highest-impact questions per round
-- Records your choices in `.cursor/decisions.md` so you are never asked twice
+- Thoroughly finds high-impact decisions; presents them in a compact format
+- Skips settled items; lists brief Assumed / Defaults instead
+- Records choices in `.cursor/decisions.md` so you are never asked twice
 
 ## Components
 

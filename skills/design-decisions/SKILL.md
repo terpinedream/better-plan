@@ -9,8 +9,12 @@ description: Identify architecture and design decisions the user should make
 # Design Decision Checkpoint
 
 Goal: the user, not the agent, makes every significant architecture/design
-decision. Many users don't realize which choices are significant, so surface
-them, explain them, and let the user choose.
+decision. Be thorough when finding and ranking decisions; be condensed when
+presenting them. Many users don't realize which choices are significant, so
+surface them — but as a compact chooser, not an essay.
+
+**Presentation:** Prefer an interactive question tool when available. No
+preamble, no recap of the request, no plan in the same message as questions.
 
 ## 1. Gather what is already decided
 
@@ -23,7 +27,7 @@ Check these sources, in order:
    config files, and manifests (package.json, pyproject.toml, Cargo.toml, etc.)
 
 Anything established by these sources is settled. Do not re-ask it. List it
-under "Assumed from existing project" so the user can override it if they want.
+under **Assumed** (compact) so the user can override.
 
 ## 2. Identify the decisions that matter
 
@@ -42,38 +46,44 @@ rest of the code, or involves real trade-offs. Scan these areas:
 - Platform, licensing, or compliance constraints
 - Build vs buy for any non-trivial component
 
-Also surface decisions the user may not realize are decisions. Examples: "this
-feature implies a persistent data store", "this needs a plugin or extension
-boundary", "this implies a choice between sync and async". Always explain why
-the decision matters for THIS specific project.
+Also surface decisions the user may not realize are decisions (e.g. implies a
+persistent store, needs a plugin boundary, sync vs async). Always know *why*
+it matters for this project — even if the reply states that in one line.
 
 ## 3. Rank and limit
 
-- Ask only the 3-6 highest-impact open decisions per round.
-- Group the minor ones into a "Defaults I'll use unless you object" list, each
-  with a one-line reason.
-- Never pad with trivial choices. Too many questions makes the checkpoint
-  annoying and people will disable it.
+- Ask only the **3–6** highest-impact open decisions per round.
+- Group minor ones into **Defaults** (one line each: `X — reason`).
+- Never pad with trivia. If nothing is open, say so in one line and plan.
 
-## 4. Present each decision
+## 4. Present (condensed format)
 
-For each decision include:
+Think through full pros/cons; **show** a tight version:
 
-- The question, in plain language, and why it matters for this project
-- 2-4 real options, each with: pros, cons, and when it is the best fit
-- Your recommendation with reasoning, clearly labeled as a suggestion
-- An "other / not sure, explain more" path
+```markdown
+**Assumed:** `A`; `B`; `C`
 
-If an interactive question tool (multiple choice) is available, use it so the
-user can answer quickly. Do not bury the choices in long prose.
+**Defaults:** `X — reason`; `Y — reason`
 
-Do not choose for the user on a significant decision, even when one option
-seems obvious. Recommend, but let them confirm.
+### 1. <Question>?
+*<one-line why it matters here>*
+- **A)** <label> — <pro>; <con>
+- **B)** <label> — <pro>; <con>
+- **C)** <label> — <pro>; <con>   ← optional 4th
+→ **Suggest: A** — <one-line reason>
+```
+
+Per decision:
+
+- 2–4 real options; each option = **one line** (pro and con folded in).
+- No separate "when to use" paragraphs; fold into that line.
+- Include an "other / not sure, explain more" path (tool or final line).
+- Recommend, but do not choose for the user on significant decisions.
+- If the user asks for more detail on an option, then expand — don't lead with it.
 
 ## 5. Record and proceed
 
-1. Write the answers to `.cursor/decisions.md`, creating it if needed. Use
-   this format per decision:
+1. Write answers to `.cursor/decisions.md`, creating it if needed:
 
    ```markdown
    ## <Decision title>
@@ -86,11 +96,11 @@ seems obvious. Recommend, but let them confirm.
 
 2. Write the plan, referencing each decision where it affects the work.
 3. If an answer opens a new significant fork, run a short follow-up round
-   (same rules, same limits) before finalizing the plan.
+   (same thoroughness, same condensed format, same 3–6 limit) before finalizing.
 
 ## When NOT to run
 
 Skip the full checkpoint for small, local changes (bug fixes, renames, single
 functions, copy changes, dependency bumps). If unsure, run a minimal version:
-list your assumptions in one short paragraph and ask only if something is
+list assumptions in one short paragraph and ask only if something is
 genuinely consequential.
